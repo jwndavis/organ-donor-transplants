@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Organ Donation and Transplantation</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <link href='https://api.mapbox.com/mapbox-assembly/v0.8.0/assembly.min.css' rel='stylesheet'>
+    <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
+    <link href='css/styles.css' rel='stylesheet' />
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
+    
+</head>
+
+<body>
+
+    <div class='grid'>
+        <div class='col col--12 col--9-ml h180 h-full-ml'>
+            <div id="map" class='viewport-third viewport-full-ml'></div>
+
+            <!-- ui slider -->
+            <div id='slider' class='range w240 bg-white round-ml p12'>
+                <input type='range' min="1991", max="2016", value="1", step="1" class= "slider"/>
+            </div>
+
+            <!-- ui year -->
+            <div id='current-year' class='pt6 px12 bg-white border border--gray-light round'>
+                  <p class='txt-bold txt-headline'>Year:
+                      <span>1991</span>
+                  </p>
+            </div>
+            
+            <!-- legend -->
+            <div id='legend' class='bg-white round-ml p18'>
+                <h3 class='txt-bold mb12 w-full mx-auto'>Legend</h3>
+                <div class='legend-circles relative w180 wmax180'>
+                <div class="legend-large border border--gray-light absolute"></div>
+                <div class="legend-small border border--gray-light absolute"></div>
+                <div class="legend-large-label txt-m absolute"></div>
+                <div class="legend-small-label txt-m absolute"></div>
+            </div>
+        </div>
+        </div>
+        
+        <div class='col col--12 col--3-ml p12 pb6 viewport-twothirds viewport-full-ml'>
+            <div class='h-full scroll-auto'>
+                <h1 class='txt-headline mb6'>Increased Success of Organ Transplants</p>
+                <h2 class='txt-xl mt18 mb12'>Organ Donors</h2>
+                <p>The slide bar at the lower left of the screen allows you to scroll through the last 25 years of organ donation and transplantation. When you move the mouse over each proportional symbol, an information window appears showing how many transplants were received by patients and how many orgas were donated for each year.</p>
+                <footer class='mt12 bg-gray-faint txt-s'>
+<!--                    <img src='images/Literacy-Levels-in-Kenya.jpg'>-->
+                    <ul>
+                        <li>Explore <a class='link' href='http://unos.org'>UNOS.</a></li>
+                        <li>Map authored by <a class='link' href='https://twitter.com/jwndavis'>John Davis</a></li>
+                        </ul>
+                </footer>
+            </div>
+        </div>
+    </div>
+    
+    <div id='info' class='py6 px12 bg-white border border--gray-light round absolute wmax200 none'>
+    <p>State: <span></span></p>
+    <p class='transplants'>Transplants <span></span>: <span class='txt-1 txt-bold'></span></p>
+    <p class='donors'>Donors <span></span>: <span class='txt-1 txt-bold'></span></p>
+    <hr class='txt-hr'>
+    <p class='my6'>Trend: 1991 &ndash; 2016</p>
+    <p class='mb6'><span class='transplantspark'></span></p>
+    <p><span class='donorspark'></span></p>
+    </div>
+    
+    
+    
+    
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+    <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.8.0/assembly.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+    <script src='js/app.js'></script>
+</body>
+
+</html>
