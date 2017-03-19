@@ -34,7 +34,24 @@
             });
         }
     }
+    
+    // define the attributes for the labels
+        var labels = {
+            "ALL_ORG": "All Organs",
+            "KIDNEY": "Kidneys",
+            "LIVER": "Livers",
+            "HEART": "Hearts",
+            "PANCREAS": "Pancreas",
+            "KID_PAN": "Kidney/Pancreas",
+            "LUNG": "Lungs",
+            "HRT_LUN": "Heart/Lung",
+            "INTESTINE": "Intestine"
+        }
 
+        // set global variables mapped attribute, and normalizing attribute
+        var attributeValue = "ALL_ORG",
+            normValue = "ALL_DON";
+    
     function drawMap(data) {
 
           console.log(data);
@@ -54,6 +71,11 @@
         resizeCircles(transplantLayer, donorLayer, 1991);
 
         sequenceUI(transplantLayer, donorLayer);
+        
+        addUitransplants(transplantLayer);
+        
+        addUidonors(donorLayer);
+        
     }
 
     function calcRadius(val) {
@@ -73,7 +95,7 @@
         });
 
         retrieveInfo(transplantLayer, donorLayer, currentYear);
-
+        
     }
 
     function sequenceUI(transplantLayer, donorLayer) {
@@ -129,6 +151,72 @@
         
     }
 
+    function addUitransplants(transplantLayer) {
+
+        var transplantMenu = L.control({
+            position: 'topright'
+        });
+        
+        transplantMenu.onAdd = function(map) {
+            
+            // select the element with id of 'legend'
+                var div = L.DomUtil.get("ui-organs");
+
+                // disable the mouse events
+                L.DomEvent.disableScrollPropagation(div);
+                L.DomEvent.disableClickPropagation(div);
+
+                // add legend to the control
+                return div;
+        }
+        transplantMenu.addTo(map);
+        
+            // select the user interaction controls for each attirbute id in the div element and changing the attribute when clicked
+            $('select[id="ALL_ORG"]').change(function() {
+
+                // reassigning the global attributeValue and returning that value
+                attributeValue = $(this).val();
+
+                // redrawing the counties in the updateMap function
+                //updateMap(transplantLayer);
+
+            });
+
+        }
+    
+    function addUidonors(donorLayer) {
+
+        var donorMenu = L.control({
+            position: 'topright'
+        });
+        
+        donorMenu.onAdd = function(map) {
+            
+            // select the element with id of 'legend'
+                var div = L.DomUtil.get("ui-donors");
+
+                // disable the mouse events
+                L.DomEvent.disableScrollPropagation(div);
+                L.DomEvent.disableClickPropagation(div);
+
+                // add legend to the control
+                return div;
+        }
+        donorMenu.addTo(map);
+        
+            // select the user interaction controls for each attirbute id in the div element and changing the attribute when clicked
+            $('select[id="ALL_DON"]').change(function() {
+
+                // reassigning the global attributeValue and returning that value
+                attributeValue = $(this).val();
+
+                // redrawing the counties in the updateMap function
+                //updateMap(donorLayer);
+
+            });
+
+        }
+    
     function drawLegend(data) {
 
         // create Leaflet control for the legend
