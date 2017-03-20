@@ -10,7 +10,7 @@
     <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
     <link href='css/styles.css' rel='stylesheet' />
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
-    
+
 </head>
 
 <body>
@@ -21,56 +21,58 @@
 
             <!-- ui slider -->
             <div id='slider' class='range w240 bg-white round-ml p12'>
-                <input type='range' min="1991", max="2016", value="1", step="1" class= "slider"/>
+                <input type='range' min="1991" , max="2016" , value="1" , step="1" class="slider" />
             </div>
 
             <!-- ui year -->
             <div id='current-year' class='pt6 px12 bg-white border border--gray-light round'>
-                  <p class='txt-bold txt-headline'>Year:
-                      <span>1991</span>
-                  </p>
+                <p class='txt-bold txt-headline'>Year:
+                    <span>1991</span>
+                </p>
             </div>
-            
+
+            <!--ui organ type-->
             <div id='ui-organs'>
                 <label>Choose an Organ Type:</label>
                 <select id="ALL_ORG">
-            <option value="ALL_ORG" selected>All Organs</option>
-            <option value="KIDNEY">Kidney</option>
-            <option value="LIVER">Liver</option>
-            <option value="HEART">Heart</option>
-            <option value="PANCREAS">Pancreas</option>
-            <option value="KID_PAN">Kidney/Pancreas</option>
-            <option value="LUNG">Lung</option>
-            <option value="HRT_LUN">Heart/Lung</option>
-            <option value="INTESTINE">Intestine</option>
-            </select>
+                    <option value="ALL_ORG" selected>All Organs</option>
+                    <option value="KIDNEY">Kidney</option>
+                    <option value="LIVER">Liver</option>
+                    <option value="PANCREAS">Pancreas</option>
+                    <option value="KID_PAN">Kidney/Pancreas</option>
+                    <option value="HEART">Heart</option>
+                    <option value="LUNG">Lung</option>
+                    <option value="HRT_LUN">Heart/Lung</option>
+                    <option value="INTESTINE">Intestine</option>
+                </select>
 
             </div>
-            
+
+            <!--ui donor type-->
             <div id='ui-donors'>
                 <label>Choose a Donor Type:</label>
                 <select id="ALL_DON">
-            <option value="ALL_DON" selected>All Donors</option>
-            <option value="DECS_DON">Deceased Donors</option>
-            <option value="LIV_DON">Living Donors</option>
-            </select>
+                    <option value="ALL_DON" selected>All Donors</option>
+                    <option value="DECS_DON">Deceased Donors</option>
+                    <option value="LIV_DON">Living Donors</option>
+                </select>
 
             </div>
-            
-            <!-- legend -->
+
+            <!--legend -->
             <div id='legend' class='bg-white round-ml p18'>
                 <h3 class='txt-bold mb12 w-full mx-auto'>Legend</h3>
                 <div class='legend-circles relative w180 wmax180'>
-                <div class="legend-large border border--gray-light absolute"></div>
-                <div class="legend-small border border--gray-light absolute"></div>
-                <div class="legend-large-label txt-m absolute"></div>
-                <div class="legend-small-label txt-m absolute"></div>
+                    <div class="legend-large border border--gray-light absolute"></div>
+                    <div class="legend-small border border--gray-light absolute"></div>
+                    <div class="legend-large-label txt-m absolute"></div>
+                    <div class="legend-small-label txt-m absolute"></div>
+                </div>
             </div>
         </div>
-        </div>
-        
+
         <div class='col col--12 col--3-ml p12 pb6 viewport-twothirds viewport-full-ml'>
-            <div class='h-full'>
+            <div class='h-full scroll-auto'>
                 <h1 class='txt-headline mb6'>Increased Success of Organ Transplants</p>
                 <h2 class='txt-xl mt18 mb12'>Organ Donors</h2>
                 <p>The slide bar at the lower left of the screen allows you to scroll through the last 25 years of organ donation and transplantation. When you move the mouse over each proportional symbol, an information window appears showing how many transplants were received by patients and how many orgas were donated for each year.</p>

@@ -1,8 +1,8 @@
-/* custom CSS rules */
 body {
     font-family: "Work Sans", sans-serif;
 }
-.legend-large, .legend-small {
+.legend-large,
+.legend-small {
     border-radius: 50%;
 }
 h1 {
@@ -18,13 +18,16 @@ p {
 background {
     color: orange;
 }
-hr.small, hr.large {
+hr.small,
+hr.large {
     width: 80px;
     position: absolute;
     top: -8px;
     left: 50px;
-    border: 1px solid #ccc;     /* overwrite assembly.css rule */
-    margin-top: 8px;            /* overwrite assembly.css rule */
+    border: 1px solid #ccc;
+    /* overwrite assembly.css rule */
+    margin-top: 8px;
+    /* overwrite assembly.css rule */
 }
 .donors {
     color: blue;

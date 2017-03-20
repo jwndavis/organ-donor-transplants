@@ -2,7 +2,7 @@
 
     L.mapbox.accessToken = 'pk.eyJ1IjoianduZGF2aXMiLCJhIjoiY2l6NzRsN2huMDAzNDJxbzFiOXl6d3BjbCJ9.LTLHf072E8bo_vHCfHOggA';
 
-    // create the Leaflet map using mapbox.light tiles
+
     var map = L.mapbox.map('map', 'mapbox.light', {
         zoomSnap: .1,
         center: [40, -100],
@@ -11,11 +11,6 @@
         maxZoom: 10
     });
 
-
-
-
-
-    // load CSV data
     omnivore.csv('data/transplants_states2.csv')
         .on('ready', function (e) {
             drawMap(e.target.toGeoJSON());
@@ -34,32 +29,30 @@
             });
         }
     }
-    
-    // define the attributes for the labels
-        var labels = {
-            "ALL_ORG": "All Organs",
-            "KIDNEY": "Kidneys",
-            "LIVER": "Livers",
-            "HEART": "Hearts",
-            "PANCREAS": "Pancreas",
-            "KID_PAN": "Kidney/Pancreas",
-            "LUNG": "Lungs",
-            "HRT_LUN": "Heart/Lung",
-            "INTESTINE": "Intestine"
-        }
 
-        // set global variables mapped attribute, and normalizing attribute
-        var attributeValue = "ALL_ORG",
-            normValue = "ALL_DON";
-    
+    var labels = {
+        "ALL_ORG": "All Organs",
+        "KIDNEY": "Kidneys",
+        "LIVER": "Livers",
+        "PANCREAS": "Pancreas",
+        "KID_PAN": "Kidney/Pancreas",
+        "HEART": "Hearts",
+        "LUNG": "Lungs",
+        "HRT_LUN": "Heart/Lung",
+        "INTESTINE": "Intestine"
+    }
+
+    var attributeValue = "ALL_ORG",
+        normValue = "ALL_DON";
+
     function drawMap(data) {
 
-          console.log(data);
+        console.log(data);
 
         var transplantLayer = L.geoJson(data, options).addTo(map);
         var donorLayer = L.geoJson(data, options).addTo(map);
 
-   //     map.fitBounds(transplantLayer.getBounds());
+        //     map.fitBounds(transplantLayer.getBounds());
 
         transplantLayer.setStyle({
             color: 'green',
@@ -71,11 +64,11 @@
         resizeCircles(transplantLayer, donorLayer, 1991);
 
         sequenceUI(transplantLayer, donorLayer);
-        
+
         addUitransplants(transplantLayer);
-        
+
         addUidonors(donorLayer);
-        
+
     }
 
     function calcRadius(val) {
@@ -95,60 +88,54 @@
         });
 
         retrieveInfo(transplantLayer, donorLayer, currentYear);
-        
+
     }
 
     function sequenceUI(transplantLayer, donorLayer) {
 
-        // create Leaflet control for the slider
         var sliderControl = L.control({
             position: 'bottomleft'
         });
-        
-        // when added to the map
+
         sliderControl.onAdd = function (map) {
 
-            // select the element with id of 'slider'
             var controls = L.DomUtil.get("slider");
 
-            // disable the mouse events
             L.DomEvent.disableScrollPropagation(controls);
             L.DomEvent.disableClickPropagation(controls);
 
-            // add slider to the control
             return controls;
 
         }
-        
-        // add the control to the map
+
         sliderControl.addTo(map);
 
         var yearControl = L.control({
             position: 'bottomleft'
         });
-        
-        yearControl.onAdd = function(map) {
 
-                var year = L.DomUtil.get("current-year");
+        yearControl.onAdd = function (map) {
 
-                L.DomEvent.disableScrollPropagation(year);
-                L.DomEvent.disableClickPropagation(year);
+            var year = L.DomUtil.get("current-year");
 
-                return year;
-            }
-        
+            L.DomEvent.disableScrollPropagation(year);
+            L.DomEvent.disableClickPropagation(year);
+
+            return year;
+        }
+
         yearControl.addTo(map);
 
         var output = $('#current-year span');
-        
+
         $('.slider')
             .on('input change', function () {
-                var currentYear = $(this).val();   
+                var currentYear = $(this).val();
                 resizeCircles(transplantLayer, donorLayer, currentYear);
-            
-            output.html(currentYear);
+
+                output.html(currentYear);
             });
-        
+
     }
 
     function addUitransplants(transplantLayer) {
@@ -156,93 +143,73 @@
         var transplantMenu = L.control({
             position: 'topright'
         });
-        
-        transplantMenu.onAdd = function(map) {
-            
-            // select the element with id of 'legend'
-                var div = L.DomUtil.get("ui-organs");
 
-                // disable the mouse events
-                L.DomEvent.disableScrollPropagation(div);
-                L.DomEvent.disableClickPropagation(div);
+        transplantMenu.onAdd = function (map) {
 
-                // add legend to the control
-                return div;
+            var div = L.DomUtil.get("ui-organs");
+
+            L.DomEvent.disableScrollPropagation(div);
+            L.DomEvent.disableClickPropagation(div);
+
+            return div;
         }
         transplantMenu.addTo(map);
-        
-            // select the user interaction controls for each attirbute id in the div element and changing the attribute when clicked
-            $('select[id="ALL_ORG"]').change(function() {
 
-                // reassigning the global attributeValue and returning that value
-                attributeValue = $(this).val();
+        $('select[id="ALL_ORG"]').change(function () {
 
-                // redrawing the counties in the updateMap function
-                //updateMap(transplantLayer);
+            attributeValue = $(this).val();
 
-            });
+            //updateMap(transplantLayer);
+        });
 
-        }
-    
+    }
+
     function addUidonors(donorLayer) {
 
         var donorMenu = L.control({
             position: 'topright'
         });
-        
-        donorMenu.onAdd = function(map) {
-            
-            // select the element with id of 'legend'
-                var div = L.DomUtil.get("ui-donors");
 
-                // disable the mouse events
-                L.DomEvent.disableScrollPropagation(div);
-                L.DomEvent.disableClickPropagation(div);
+        donorMenu.onAdd = function (map) {
 
-                // add legend to the control
-                return div;
+            var div = L.DomUtil.get("ui-donors");
+
+            L.DomEvent.disableScrollPropagation(div);
+            L.DomEvent.disableClickPropagation(div);
+
+            return div;
         }
         donorMenu.addTo(map);
-        
-            // select the user interaction controls for each attirbute id in the div element and changing the attribute when clicked
-            $('select[id="ALL_DON"]').change(function() {
 
-                // reassigning the global attributeValue and returning that value
-                attributeValue = $(this).val();
+        $('select[id="ALL_DON"]').change(function () {
 
-                // redrawing the counties in the updateMap function
-                //updateMap(donorLayer);
+            attributeValue = $(this).val();
 
-            });
+            //updateMap(donorLayer);
+        });
 
-        }
-    
+    }
+
     function drawLegend(data) {
 
-        // create Leaflet control for the legend
         var legend = L.control({
             position: 'bottomright'
         });
-        // when added to the map
         legend.onAdd = function (map) {
 
-                // select the element with id of 'legend'
-                var div = L.DomUtil.get("legend");
+            var div = L.DomUtil.get("legend");
 
-                // disable the mouse events
-                L.DomEvent.disableScrollPropagation(div);
-                L.DomEvent.disableClickPropagation(div);
+            L.DomEvent.disableScrollPropagation(div);
+            L.DomEvent.disableClickPropagation(div);
 
-                // add legend to the control
-                return div;
+            return div;
 
-            }
-            // add the control to the map
+        }
         legend.addTo(map);
 
         var dataValues = [];
 
-        data.features.map(function(state) {
+        data.features.map(function (state) {
 
             for (var year in state.properties) {
 
@@ -253,18 +220,18 @@
                     dataValues.push(attribute);
                 }
             }
-        //   console.log(dataValues);
+            //   console.log(dataValues);
         });
 
         var sortedValues = dataValues.sort(function (a, b) {
             return b - a;
 
-             console.log(sortedValues);
+            console.log(sortedValues);
         });
 
         var maxValues = Math.round(sortedValues[0] / 1000) * 1000;
 
-     console.log(maxValues);
+        console.log(maxValues);
 
         var largeDiameter = calcRadius(maxValues) * 2,
             smallDiameter = largeDiameter / 2;
@@ -317,7 +284,6 @@
             $(".transplants span:last-child").html(props['T' + currentYear]);
             $(".donors span:last-child").html(props['D' + currentYear]);
 
-            //raise opacity level as visual affordance
             e.layer.setStyle({
                 fillOpacity: .6
             });
