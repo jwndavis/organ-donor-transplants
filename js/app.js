@@ -11,7 +11,7 @@
         maxZoom: 10
     });
 
-    omnivore.csv('data/transplants_states2.csv')
+    omnivore.csv('data/transplants_donors3.csv')
         .on('ready', function (e) {
             drawMap(e.target.toGeoJSON());
             drawLegend(e.target.toGeoJSON());
@@ -69,6 +69,12 @@
 
         addUidonors(donorLayer);
 
+    }
+    
+    function updateMap(data) {
+        
+        
+        
     }
 
     function calcRadius(val) {
