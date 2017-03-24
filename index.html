@@ -6,11 +6,10 @@
     <title>Organ Donation and Transplantation</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-    <link href='https://api.mapbox.com/mapbox-assembly/v0.8.0/assembly.min.css' rel='stylesheet'>
+    <link href='https://api.mapbox.com/mapbox-assembly/v0.12.0/assembly.min.css' rel='stylesheet'>
     <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
-    <link href='css/styles.css' rel='stylesheet' />
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
-
+    <link href='css/styles.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -34,29 +33,33 @@
             <!--ui organ type-->
             <div id='ui-organs'>
                 <label>Choose an Organ Type:</label>
-                <select id="ALL_ORG">
-                    <option value="ALL_ORG" selected>All Organs</option>
-                    <option value="KIDNEY">Kidney</option>
-                    <option value="LIVER">Liver</option>
-                    <option value="PANCREAS">Pancreas</option>
-                    <option value="KID_PAN">Kidney/Pancreas</option>
-                    <option value="HEART">Heart</option>
-                    <option value="LUNG">Lung</option>
-                    <option value="HRT_LUN">Heart/Lung</option>
-                    <option value="INTESTINE">Intestine</option>
-                </select>
-
+                <div class= 'select' id= "ALL_ORG">
+                    <select class= 'select' id= "ALL_ORG">
+                        <option value="ALL_ORG" selected>All Organs</option>
+                        <option value="KIDNEY">Kidney</option>
+                        <option value="LIVER">Liver</option>
+                        <option value="PANCREAS">Pancreas</option>
+                        <option value="KID_PAN">Kidney/Pancreas</option>
+                        <option value="HEART">Heart</option>
+                        <option value="LUNG">Lung</option>
+                        <option value="HRT_LUN">Heart/Lung</option>
+                        <option value="INTESTINE">Intestine</option>
+                    </select>
+                    <div class='select-arrow'></div>
+                </div>
             </div>
-
+                
             <!--ui donor type-->
             <div id='ui-donors'>
                 <label>Choose a Donor Type:</label>
-                <select id="ALL_DON">
-                    <option value="ALL_DON" selected>All Donors</option>
-                    <option value="DECS_DON">Deceased Donors</option>
-                    <option value="LIV_DON">Living Donors</option>
-                </select>
-
+                <div class= 'select' id= "ALL_DON">
+                    <select class= 'select' id="ALL_DON">
+                        <option value="ALL_DON" selected>All Donors</option>
+                        <option value="DECS_DON">Deceased Donors</option>
+                        <option value="LIV_DON">Living Donors</option>
+                    </select>
+                    <div class='select-arrow'></div>
+                </div>
             </div>
 
             <!--legend -->
@@ -77,7 +80,6 @@
                 <h2 class='txt-xl mt18 mb12'>Organ Donors</h2>
                 <p>The slide bar at the lower left of the screen allows you to scroll through the last 25 years of organ donation and transplantation. When you move the mouse over each proportional symbol, an information window appears showing how many transplants were received by patients and how many orgas were donated for each year.</p>
                 <footer class='mt12 bg-gray-faint txt-s'>
-<!--                    <img src='images/Literacy-Levels-in-Kenya.jpg'>-->
                     <ul>
                         <li>Explore <a class='link' href='http://unos.org'>UNOS.</a></li>
                         <li>Map authored by <a class='link' href='https://twitter.com/jwndavis'>John Davis</a></li>
@@ -102,7 +104,7 @@
     
     <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
-    <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.8.0/assembly.js"></script>
+    <script src="https://api.mapbox.com/mapbox-assembly/v0.8.0/assembly.js"></script>
     <script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
     <script src='js/app.js'></script>

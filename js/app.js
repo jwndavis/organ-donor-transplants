@@ -45,12 +45,12 @@
     var attributeValue = "ALL_ORG",
         normValue = "ALL_DON";
 
-    function drawMap(data) {
+    function drawMap(dataLayer) {
 
-        console.log(data);
+        console.log(dataLayer);
 
-        var transplantLayer = L.geoJson(data, options).addTo(map);
-        var donorLayer = L.geoJson(data, options).addTo(map);
+        var transplantLayer = L.geoJson(dataLayer, options).addTo(map);
+        var donorLayer = L.geoJson(dataLayer, options).addTo(map);
 
         //     map.fitBounds(transplantLayer.getBounds());
 
@@ -60,7 +60,7 @@
         donorLayer.setStyle({
             color: 'blue',
         });
-
+        
         resizeCircles(transplantLayer, donorLayer, 1991);
 
         sequenceUI(transplantLayer, donorLayer);
@@ -69,11 +69,23 @@
 
         addUidonors(donorLayer);
 
+        updateMap(dataLayer);
+        
     }
     
-    function updateMap(data) {
+    function updateMap(dataLayer) {
         
-        
+        var subtypes = addUitransplants(transplantLayer)
+            
+        dataLayer.eachLayer(function(layer) {
+            
+            var props = layer.feature.properties;
+            console.log(props);
+            
+            layer.setStyle({
+                color: resizeCircles(props[attributeValue] / props[normValue], subtypes) 
+            });
+        });
         
     }
 
