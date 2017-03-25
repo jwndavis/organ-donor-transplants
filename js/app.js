@@ -42,35 +42,37 @@
         "INTESTINE": "Intestine"
     }
 
-    var attributeValue = "ALL_ORG",
-        normValue = "ALL_DON";
-
     var currentYear = "1991",
-        currentType = "ALL";
+        currentTransplantType = "ALL",
+        currentDonorType = "ALL"
+
+    // let's make our Leaflet layers global for ease of access for now
+    var transplantLayer,
+        donorLayer;
 
     function drawMap(data) {
 
         console.log(data);
 
-        var transplantLayer = L.geoJson(data, options).addTo(map);
-        var donorLayer = L.geoJson(data, options).addTo(map);
-
-        //     map.fitBounds(transplantLayer.getBounds());
+        transplantLayer = L.geoJson(data, options).addTo(map);
+        // donorLayer = L.geoJson(data, options).addTo(map);
 
         transplantLayer.setStyle({
             color: 'green',
         });
-        donorLayer.setStyle({
-            color: 'blue',
-        });
+        // donorLayer.setStyle({
+        //     color: 'blue',
+        // });
 
-        resizeCircles(transplantLayer, donorLayer, currentYear, currentType);
+        resizeCircles();
 
-        sequenceUI(transplantLayer, donorLayer);
+        sequenceUI();
 
-        addUitransplants(transplantLayer);
+        addUitransplants();
 
-        addUidonors(donorLayer);
+        addUidonors();
+
+        // retrieveInfo();
 
 
     }
@@ -80,28 +82,27 @@
         return radius * 1.5;
     }
 
-    function resizeCircles(transplantLayer, donorLayer, currentYear, currentType) {
+    function resizeCircles() {
 
         transplantLayer.eachLayer(function (layer) {
-            var radius = calcRadius(layer.feature.properties['T' + currentYear + '_' + currentType]);
+            var radius = calcRadius(layer.feature.properties['T' + currentYear + '_' + currentTransplantType]);
             if(Number(radius)) {
                 layer.setRadius(radius);
             }
 
         });
-        donorLayer.eachLayer(function (layer) {
-            var radius = calcRadius(Number(layer.feature.properties['D' + currentYear + '_' + currentType]));
-            if(Number(radius)){
-                layer.setRadius(radius);
-            }
+        // donorLayer.eachLayer(function (layer) {
+        //     var radius = calcRadius(Number(layer.feature.properties['D' + currentYear + '_' + currentType]));
+        //     if(Number(radius)){
+        //         layer.setRadius(radius);
+        //     }
+        // });
 
-        });
 
-        retrieveInfo(transplantLayer, donorLayer, currentYear);
 
     }
 
-    function sequenceUI(transplantLayer, donorLayer) {
+    function sequenceUI() {
 
         var sliderControl = L.control({
             position: 'bottomleft'
@@ -140,15 +141,14 @@
 
         $('.slider')
             .on('input change', function () {
-                var currentYear = $(this).val();
-                resizeCircles(transplantLayer, donorLayer, currentYear, currentType);
-
+                currentYear = $(this).val();
+                resizeCircles();
                 output.html(currentYear);
             });
 
     }
 
-    function addUitransplants(transplantLayer) {
+    function addUitransplants() {
 
         var transplantMenu = L.control({
             position: 'topright'
@@ -167,9 +167,9 @@
 
         $('select[id="ALL_ORG"]').change(function () {
 
-            attributeValue = $(this).val();
+            currentTransplantType = $(this).val();
 
-            //updateMap(transplantLayer);
+            resizeCircles();
         });
 
     }
@@ -193,9 +193,9 @@
 
         $('select[id="ALL_DON"]').change(function () {
 
-            normValue = $(this).val();
+            currentType = $(this).val();
 
-            //updateMap(donorLayer);
+            resizeCircles();
         });
 
     }
@@ -230,7 +230,7 @@
                     dataValues.push(attribute);
                 }
             }
-            //   console.log(dataValues);
+
         });
 
         var sortedValues = dataValues.sort(function (a, b) {
@@ -240,8 +240,6 @@
         });
 
         var maxValues = Math.round(sortedValues[0] / 1000) * 1000;
-
-        //console.log(maxValues);
 
         var largeDiameter = calcRadius(maxValues) * 2,
             smallDiameter = largeDiameter / 2;
@@ -278,7 +276,7 @@
 
     }
 
-    function retrieveInfo(transplantLayer, donorLayer, currentYear, currentType) {
+    function retrieveInfo() {
 
         var info = $('#info');
 
