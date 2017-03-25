@@ -45,6 +45,9 @@
     var attributeValue = "ALL_ORG",
         normValue = "ALL_DON";
 
+    var currentYear = "1991",
+        currentType = "ALL";
+    
     function drawMap(data) {
 
         console.log(data);
@@ -61,7 +64,7 @@
             color: 'blue',
         });
         
-        resizeCircles(transplantLayer, donorLayer, 1991);
+        resizeCircles(transplantLayer, donorLayer, currentYear, currentType);
 
         sequenceUI(transplantLayer, donorLayer);
 
@@ -75,22 +78,19 @@
 //    
 //    function updateMap(transplantLayer, donorLayer) {
 //        
-//        var transplantLayer = L.geoJson(data, options).addTo(map);
-//        var donorLayer = L.geoJson(data, options).addTo(map);
-//
-//        
-//        var subtypes = addUitransplants(data),
-//            addUidonors;
+//        var update = resizeCircles(transplantLayer, donorLayer);
 //            
-//        dataLayer.eachLayer(function(layer) {
+//        donorLayer.eachLayer(function(layer) {
 //            
 //            var props = layer.feature.properties;
 //            console.log(props);
 //            
 //            layer.setStyle({
-//                color: resizeCircles(subtypes) 
+//                color: (props[attributeValue], props[normValue], update) 
 //            });
 //        });
+//        
+//        resizeCircles(transplantLayer, donorLayer, currentYear, currentType);
 //        
 //    }
 
@@ -99,14 +99,14 @@
         return radius * 1.5;
     }
 
-    function resizeCircles(transplantLayer, donorLayer, currentYear) {
+    function resizeCircles(transplantLayer, donorLayer, currentYear, currentType) {
 
         transplantLayer.eachLayer(function (layer) {
-            var radius = calcRadius(Number(layer.feature.properties['T' + currentYear]));
+            var radius = calcRadius(Number(layer.feature.properties['T' + currentYear + '_' + currentType]));
             layer.setRadius(radius);
         });
         donorLayer.eachLayer(function (layer) {
-            var radius = calcRadius(Number(layer.feature.properties['D' + currentYear]));
+            var radius = calcRadius(Number(layer.feature.properties['D' + currentYear + '_' + currentType]));
             layer.setRadius(radius);
         });
 
@@ -154,7 +154,7 @@
         $('.slider')
             .on('input change', function () {
                 var currentYear = $(this).val();
-                resizeCircles(transplantLayer, donorLayer, currentYear);
+                resizeCircles(transplantLayer, donorLayer, currentYear, currentType);
 
                 output.html(currentYear);
             });
@@ -182,7 +182,7 @@
 
             attributeValue = $(this).val();
 
-            drawMap(transplantLayer);
+            //updateMap(transplantLayer);
         });
 
     }
@@ -208,7 +208,7 @@
 
             normValue = $(this).val();
 
-            drawMap(donorLayer);
+            //updateMap(donorLayer);
         });
 
     }
@@ -291,7 +291,7 @@
 
     }
 
-    function retrieveInfo(transplantLayer, donorLayer, currentYear) {
+    function retrieveInfo(transplantLayer, donorLayer, currentYear, currentType) {
 
         var info = $('#info');
 
@@ -301,7 +301,7 @@
 
             var props = e.layer.feature.properties;
 
-            $('#info span').html(props.State_Name);
+            $('#info span').html(props.State);
             $(".transplants span:first-child").html('(' + currentYear + ')');
             $(".donors span:first-child").html('(' + currentYear + ')');
             $(".transplants span:last-child").html(props['T' + currentYear]);
@@ -341,7 +341,7 @@
             var transplantValues = [],
                 donorValues = [];
 
-            for (var i =    1991; i <= 2016; i++) {
+            for (var i = 1991; i <= 2016; i++) {
                 transplantValues.push(props['T' + i]);
                 donorValues.push(props['D' + i]);
             }
