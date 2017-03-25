@@ -47,7 +47,7 @@
 
     var currentYear = "1991",
         currentType = "ALL";
-    
+
     function drawMap(data) {
 
         console.log(data);
@@ -63,7 +63,7 @@
         donorLayer.setStyle({
             color: 'blue',
         });
-        
+
         resizeCircles(transplantLayer, donorLayer, currentYear, currentType);
 
         sequenceUI(transplantLayer, donorLayer);
@@ -72,27 +72,8 @@
 
         addUidonors(donorLayer);
 
-        //updateMap(transplantLayer, donorLayer);
-        
+
     }
-//    
-//    function updateMap(transplantLayer, donorLayer) {
-//        
-//        var update = resizeCircles(transplantLayer, donorLayer);
-//            
-//        donorLayer.eachLayer(function(layer) {
-//            
-//            var props = layer.feature.properties;
-//            console.log(props);
-//            
-//            layer.setStyle({
-//                color: (props[attributeValue], props[normValue], update) 
-//            });
-//        });
-//        
-//        resizeCircles(transplantLayer, donorLayer, currentYear, currentType);
-//        
-//    }
 
     function calcRadius(val) {
         var radius = Math.sqrt(val / Math.PI);
@@ -102,12 +83,18 @@
     function resizeCircles(transplantLayer, donorLayer, currentYear, currentType) {
 
         transplantLayer.eachLayer(function (layer) {
-            var radius = calcRadius(Number(layer.feature.properties['T' + currentYear + '_' + currentType]));
-            layer.setRadius(radius);
+            var radius = calcRadius(layer.feature.properties['T' + currentYear + '_' + currentType]);
+            if(Number(radius)) {
+                layer.setRadius(radius);
+            }
+
         });
         donorLayer.eachLayer(function (layer) {
             var radius = calcRadius(Number(layer.feature.properties['D' + currentYear + '_' + currentType]));
-            layer.setRadius(radius);
+            if(Number(radius)){
+                layer.setRadius(radius);
+            }
+
         });
 
         retrieveInfo(transplantLayer, donorLayer, currentYear);
@@ -254,7 +241,7 @@
 
         var maxValues = Math.round(sortedValues[0] / 1000) * 1000;
 
-        console.log(maxValues);
+        //console.log(maxValues);
 
         var largeDiameter = calcRadius(maxValues) * 2,
             smallDiameter = largeDiameter / 2;
