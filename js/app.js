@@ -11,7 +11,7 @@
         maxZoom: 10
     });
 
-    omnivore.csv('data/transplants_donors3.csv')
+    omnivore.csv('data/transplant_donor_data2.csv')
         .on('ready', function (e) {
             drawMap(e.target.toGeoJSON());
             drawLegend(e.target.toGeoJSON());
@@ -45,12 +45,12 @@
     var attributeValue = "ALL_ORG",
         normValue = "ALL_DON";
 
-    function drawMap(dataLayer) {
+    function drawMap(data) {
 
-        console.log(dataLayer);
+        console.log(data);
 
-        var transplantLayer = L.geoJson(dataLayer, options).addTo(map);
-        var donorLayer = L.geoJson(dataLayer, options).addTo(map);
+        var transplantLayer = L.geoJson(data, options).addTo(map);
+        var donorLayer = L.geoJson(data, options).addTo(map);
 
         //     map.fitBounds(transplantLayer.getBounds());
 
@@ -69,25 +69,29 @@
 
         addUidonors(donorLayer);
 
-        updateMap(dataLayer);
+        //updateMap(transplantLayer, donorLayer);
         
     }
     
-    function updateMap(dataLayer) {
-        
-        var subtypes = addUitransplants(transplantLayer)
-            
-        dataLayer.eachLayer(function(layer) {
-            
-            var props = layer.feature.properties;
-            console.log(props);
-            
-            layer.setStyle({
-                color: resizeCircles(props[attributeValue] / props[normValue], subtypes) 
-            });
-        });
-        
-    }
+//    function updateMap(data) {
+//        
+//        var transplantLayer = L.geoJson(data, options).addTo(map);
+//        var donorLayer = L.geoJson(data, options).addTo(map);
+//
+//        
+//        var subtypes = addUitransplants(data);
+//            
+//        dataLayer.eachLayer(function(layer) {
+//            
+//            var props = layer.feature.properties;
+//            console.log(props);
+//            
+//            layer.setStyle({
+//                color: resizeCircles(subtypes) 
+//            });
+//        });
+//        
+//    }
 
     function calcRadius(val) {
         var radius = Math.sqrt(val / Math.PI);
@@ -177,7 +181,7 @@
 
             attributeValue = $(this).val();
 
-            //updateMap(transplantLayer);
+            //drawMap(transplantLayer);
         });
 
     }
@@ -201,9 +205,9 @@
 
         $('select[id="ALL_DON"]').change(function () {
 
-            attributeValue = $(this).val();
+            normValue = $(this).val();
 
-            //updateMap(donorLayer);
+            //drawMap(donorLayer);
         });
 
     }
