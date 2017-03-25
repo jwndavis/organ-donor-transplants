@@ -72,14 +72,15 @@
         //updateMap(transplantLayer, donorLayer);
         
     }
-    
-//    function updateMap(data) {
+//    
+//    function updateMap(transplantLayer, donorLayer) {
 //        
 //        var transplantLayer = L.geoJson(data, options).addTo(map);
 //        var donorLayer = L.geoJson(data, options).addTo(map);
 //
 //        
-//        var subtypes = addUitransplants(data);
+//        var subtypes = addUitransplants(data),
+//            addUidonors;
 //            
 //        dataLayer.eachLayer(function(layer) {
 //            
@@ -181,7 +182,7 @@
 
             attributeValue = $(this).val();
 
-            //drawMap(transplantLayer);
+            drawMap(transplantLayer);
         });
 
     }
@@ -207,7 +208,7 @@
 
             normValue = $(this).val();
 
-            //drawMap(donorLayer);
+            drawMap(donorLayer);
         });
 
     }
@@ -340,7 +341,7 @@
             var transplantValues = [],
                 donorValues = [];
 
-            for (var i = 1991; i <= 2016; i++) {
+            for (var i =    1991; i <= 2016; i++) {
                 transplantValues.push(props['T' + i]);
                 donorValues.push(props['D' + i]);
             }

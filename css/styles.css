@@ -29,6 +29,10 @@ hr.large {
     margin-top: 8px;
     /* overwrite assembly.css rule */
 }
+label {
+    font-size: 1.5em;
+    color: navy;
+}
 .donors {
     color: blue;
 }
