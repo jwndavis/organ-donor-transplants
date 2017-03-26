@@ -49,12 +49,12 @@
     var currentYear = "1991",
         currentTransplantType = "ALL",
         currentDonorType = "ALL"
-    
-    
+
+
     var transplantLayer,
         donorLayer;
-    
-    
+
+
 //
 //    var currentYear = "1991",
 //        currentTransplantType = "ALL",
@@ -90,9 +90,9 @@
         //addUidonors();
 
         retrieveInfo(donorLayer, currentYear);
-        
+
         //updateMap(transplantLayer, donorLayer);
-        
+
 
         // donorLayer.setStyle({
         //     color: 'blue',
@@ -111,13 +111,13 @@
 
     }
 
-    
+
     function calcRadius(val) {
         var radius = Math.sqrt(val / Math.PI);
         return radius * 1.5;
     }
 
-    
+
     function resizeCircles() {
 
         transplantLayer.eachLayer(function (layer) {
@@ -133,11 +133,11 @@
             layer.setRadius(radius);
             }
         });
-        
+
         retrieveInfo(donorLayer, currentYear);
     }
 
-    
+
     function sequenceUI() {
 
         var sliderControl = L.control({
@@ -184,7 +184,7 @@
             });
 
         retrieveInfo(donorLayer, currentYear);
-        
+
     }
 
     function addUitransplants() {
@@ -230,7 +230,7 @@
 //        }
 //        donorMenu.addTo(map);
 //
-//        $('select[id="ALL_DON"]').change(function () {  
+//        $('select[id="ALL_DON"]').change(function () {
 //
 //            currentType = $(this).val();
 //
@@ -304,7 +304,7 @@
             'top': largeDiameter - xsmallDiameter,
             'left': xsmallDiameter * 1.5
         });
-        
+
         $(".legend-large-label").html(maxValues);
         $(".legend-small-label").html((maxValues / 2));
         $(".legend-xsmall-label").html((maxValues / 4));
@@ -318,7 +318,7 @@
             'top': smallDiameter - 11,
             'left': largeDiameter + 30
         });
-        
+
         $(".legend-xsmall-label").css({
             'top': largeDiameter - xsmallDiameter - 11,
             'left': largeDiameter + 30
@@ -381,7 +381,7 @@
                 donorValues = [];
 
 //            var props = e.layer.feature.properties;
-//            
+//
 //            for (var year in props) {
 //
 //                var attribute = props['T1991_ALL'];
@@ -393,10 +393,11 @@
 //                }
 //            }
 
-            
+
             for (var i = 1991; i <= 2016; i++) {
-                transplantValues.push(props['T' + i]);
-                donorValues.push(props['D' + i]);
+                transplantValues.push(props['T' + i + '_' + currentTransplantType]);
+                donorValues.push(props['D' + i + '_' + currentDonorType]);
+                console.log(i, props['T' + i + '_' + currentTransplantType])
             }
 
             $('.transplantspark').sparkline(transplantValues, {
