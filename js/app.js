@@ -5,10 +5,10 @@
 
     var map = L.mapbox.map('map', 'mapbox.light', {
         zoomSnap: .1,
-        center: [40, -100],
+        center: [40, -93],
         zoom: 4,
         minZoom: 2,
-        maxZoom: 10
+        maxZoom: 7
     });
 
     omnivore.csv('data/transplant_donor_data2.csv')
@@ -29,7 +29,7 @@
             });
         }
     }
-    
+
     var labels = {
         "ALL_ORG": "All Organs",
         "KIDNEY": "Kidneys",
@@ -42,7 +42,7 @@
         "INTESTINE": "Intestine"
     }
 
-<<<<<<< HEAD
+
 //    var attributeValue = "ALL_ORG",
 //        normValue = "ALL_DON";
 
@@ -55,33 +55,28 @@
         donorLayer;
     
     
-=======
-    var currentYear = "1991",
-        currentTransplantType = "ALL",
-        currentDonorType = "ALL"
+//
+//    var currentYear = "1991",
+//        currentTransplantType = "ALL",
+//        currentDonorType = "ALL"
+//
+//    let's make our Leaflet layers global for ease of access for now
+//    var transplantLayer,
+//        donorLayer;
 
-    // let's make our Leaflet layers global for ease of access for now
-    var transplantLayer,
-        donorLayer;
 
->>>>>>> origin/master
     function drawMap(data) {
 
-        console.log(data);
+        //console.log(data);
 
         transplantLayer = L.geoJson(data, options).addTo(map);
-<<<<<<< HEAD
-        donorLayer = L.geoJson(data, options).addTo(map);
 
-        //     map.fitBounds(transplantLayer.getBounds());
-=======
-        // donorLayer = L.geoJson(data, options).addTo(map);
->>>>>>> origin/master
+        donorLayer = L.geoJson(data, options).addTo(map);
 
         transplantLayer.setStyle({
             color: 'green',
         });
-<<<<<<< HEAD
+
         donorLayer.setStyle({
             color: 'blue',
         });
@@ -92,40 +87,41 @@
 
         addUitransplants();
 
-        addUidonors();
+        //addUidonors();
 
-        retrieveInfo();
+        retrieveInfo(donorLayer, currentYear);
         
         //updateMap(transplantLayer, donorLayer);
         
-=======
+
         // donorLayer.setStyle({
         //     color: 'blue',
         // });
 
-        resizeCircles();
+//        resizeCircles();
+//
+//        sequenceUI();
+//
+//        addUitransplants();
+//
+//        addUidonors();
+//
+//        retrieveInfo();
 
-        sequenceUI();
 
-        addUitransplants();
-
-        addUidonors();
-
-        // retrieveInfo();
-
-
->>>>>>> origin/master
     }
 
+    
     function calcRadius(val) {
         var radius = Math.sqrt(val / Math.PI);
         return radius * 1.5;
     }
 
+    
     function resizeCircles() {
 
         transplantLayer.eachLayer(function (layer) {
-<<<<<<< HEAD
+
             var radius = calcRadius(Number(layer.feature.properties['T' + currentYear + '_' + currentTransplantType]));
             if(Number(radius)) {
             layer.setRadius(radius);
@@ -136,28 +132,12 @@
             if(Number(radius)) {
             layer.setRadius(radius);
             }
-=======
-            var radius = calcRadius(layer.feature.properties['T' + currentYear + '_' + currentTransplantType]);
-            if(Number(radius)) {
-                layer.setRadius(radius);
-            }
-
->>>>>>> origin/master
         });
-        // donorLayer.eachLayer(function (layer) {
-        //     var radius = calcRadius(Number(layer.feature.properties['D' + currentYear + '_' + currentType]));
-        //     if(Number(radius)){
-        //         layer.setRadius(radius);
-        //     }
-        // });
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
+        
+        retrieveInfo(donorLayer, currentYear);
     }
 
+    
     function sequenceUI() {
 
         var sliderControl = L.control({
@@ -199,13 +179,12 @@
             .on('input change', function () {
                 currentYear = $(this).val();
                 resizeCircles();
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
                 output.html(currentYear);
             });
 
+        retrieveInfo(donorLayer, currentYear);
+        
     }
 
     function addUitransplants() {
@@ -234,31 +213,31 @@
 
     }
 
-    function addUidonors(donorLayer) {
-
-        var donorMenu = L.control({
-            position: 'topright'
-        });
-
-        donorMenu.onAdd = function (map) {
-
-            var div = L.DomUtil.get("ui-donors");
-
-            L.DomEvent.disableScrollPropagation(div);
-            L.DomEvent.disableClickPropagation(div);
-
-            return div;
-        }
-        donorMenu.addTo(map);
-
-        $('select[id="ALL_DON"]').change(function () {  
-
-            currentType = $(this).val();
-
-            resizeCircles();
-        });
-
-    }
+//    function addUidonors(donorLayer) {
+//
+//        var donorMenu = L.control({
+//            position: 'topright'
+//        });
+//
+//        donorMenu.onAdd = function (map) {
+//
+//            var div = L.DomUtil.get("ui-donors");
+//
+//            L.DomEvent.disableScrollPropagation(div);
+//            L.DomEvent.disableClickPropagation(div);
+//
+//            return div;
+//        }
+//        donorMenu.addTo(map);
+//
+//        $('select[id="ALL_DON"]').change(function () {  
+//
+//            currentType = $(this).val();
+//
+//            resizeCircles();
+//        });
+//
+//    }
 
     function drawLegend(data) {
 
@@ -290,11 +269,7 @@
                     dataValues.push(attribute);
                 }
             }
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> origin/master
         });
 
         var sortedValues = dataValues.sort(function (a, b) {
@@ -305,12 +280,9 @@
 
         var maxValues = Math.round(sortedValues[0] / 1000) * 1000;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
         var largeDiameter = calcRadius(maxValues) * 2,
-            smallDiameter = largeDiameter / 2;
+            smallDiameter = largeDiameter / 2,
+            xsmallDiameter = largeDiameter / 4;
 
         $(".legend-circles").css('height', largeDiameter.toFixed());
 
@@ -326,25 +298,39 @@
             'left': smallDiameter / 2
         });
 
+        $('.legend-xsmall').css({
+            'width': xsmallDiameter.toFixed(),
+            'height': xsmallDiameter.toFixed(),
+            'top': largeDiameter - xsmallDiameter,
+            'left': xsmallDiameter * 1.5
+        });
+        
         $(".legend-large-label").html(maxValues);
         $(".legend-small-label").html((maxValues / 2));
+        $(".legend-xsmall-label").html((maxValues / 4));
 
         $(".legend-large-label").css({
             'top': -11,
-            'left': largeDiameter + 30,
+            'left': largeDiameter + 30
         });
 
         $(".legend-small-label").css({
             'top': smallDiameter - 11,
             'left': largeDiameter + 30
         });
+        
+        $(".legend-xsmall-label").css({
+            'top': largeDiameter - xsmallDiameter - 11,
+            'left': largeDiameter + 30
+        });
 
         $("<hr class='large'>").insertBefore(".legend-large-label")
         $("<hr class='small'>").insertBefore(".legend-small-label").css('top', largeDiameter - smallDiameter - 8);
+        $("<hr class='xsmall'>").insertBefore(".legend-xsmall-label").css('top', largeDiameter - xsmallDiameter - 8);
 
     }
 
-    function retrieveInfo() {
+    function retrieveInfo(donorLayer, currentYear) {
 
         var info = $('#info');
 
@@ -357,8 +343,8 @@
             $('#info span').html(props.State);
             $(".transplants span:first-child").html('(' + currentYear + ')');
             $(".donors span:first-child").html('(' + currentYear + ')');
-            $(".transplants span:last-child").html(props['T' + currentYear]);
-            $(".donors span:last-child").html(props['D' + currentYear]);
+            $(".transplants span:last-child").html(props['T1991_ALL']);
+            $(".donors span:last-child").html(props['D1991_ALL']);
 
             e.layer.setStyle({
                 fillOpacity: .6
@@ -394,6 +380,20 @@
             var transplantValues = [],
                 donorValues = [];
 
+//            var props = e.layer.feature.properties;
+//            
+//            for (var year in props) {
+//
+//                var attribute = props['T1991_ALL'];
+//
+//                if (Number(attribute)) {
+//
+//                    transplantValues.push(attribute);
+//                    donorValues.push(attribute);
+//                }
+//            }
+
+            
             for (var i = 1991; i <= 2016; i++) {
                 transplantValues.push(props['T' + i]);
                 donorValues.push(props['D' + i]);
