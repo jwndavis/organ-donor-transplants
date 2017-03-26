@@ -29,7 +29,7 @@
             });
         }
     }
-
+    
     var labels = {
         "ALL_ORG": "All Organs",
         "KIDNEY": "Kidneys",
