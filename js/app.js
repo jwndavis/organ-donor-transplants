@@ -42,6 +42,7 @@
         "INTESTINE": "Intestine"
     }
 
+<<<<<<< HEAD
 //    var attributeValue = "ALL_ORG",
 //        normValue = "ALL_DON";
 
@@ -54,18 +55,33 @@
         donorLayer;
     
     
+=======
+    var currentYear = "1991",
+        currentTransplantType = "ALL",
+        currentDonorType = "ALL"
+
+    // let's make our Leaflet layers global for ease of access for now
+    var transplantLayer,
+        donorLayer;
+
+>>>>>>> origin/master
     function drawMap(data) {
 
         console.log(data);
 
         transplantLayer = L.geoJson(data, options).addTo(map);
+<<<<<<< HEAD
         donorLayer = L.geoJson(data, options).addTo(map);
 
         //     map.fitBounds(transplantLayer.getBounds());
+=======
+        // donorLayer = L.geoJson(data, options).addTo(map);
+>>>>>>> origin/master
 
         transplantLayer.setStyle({
             color: 'green',
         });
+<<<<<<< HEAD
         donorLayer.setStyle({
             color: 'blue',
         });
@@ -82,25 +98,24 @@
         
         //updateMap(transplantLayer, donorLayer);
         
+=======
+        // donorLayer.setStyle({
+        //     color: 'blue',
+        // });
+
+        resizeCircles();
+
+        sequenceUI();
+
+        addUitransplants();
+
+        addUidonors();
+
+        // retrieveInfo();
+
+
+>>>>>>> origin/master
     }
-//    
-//    function updateMap(transplantLayer, donorLayer) {
-//        
-//        var update = resizeCircles(transplantLayer, donorLayer);
-//            
-//        donorLayer.eachLayer(function(layer) {
-//            
-//            var props = layer.feature.properties;
-//            console.log(props);
-//            
-//            layer.setStyle({
-//                color: (props[attributeValue], props[normValue], update) 
-//            });
-//        });
-//        
-//        resizeCircles(transplantLayer, donorLayer, currentYear, currentType);
-//        
-//    }
 
     function calcRadius(val) {
         var radius = Math.sqrt(val / Math.PI);
@@ -110,6 +125,7 @@
     function resizeCircles() {
 
         transplantLayer.eachLayer(function (layer) {
+<<<<<<< HEAD
             var radius = calcRadius(Number(layer.feature.properties['T' + currentYear + '_' + currentTransplantType]));
             if(Number(radius)) {
             layer.setRadius(radius);
@@ -120,8 +136,26 @@
             if(Number(radius)) {
             layer.setRadius(radius);
             }
-        });
+=======
+            var radius = calcRadius(layer.feature.properties['T' + currentYear + '_' + currentTransplantType]);
+            if(Number(radius)) {
+                layer.setRadius(radius);
+            }
 
+>>>>>>> origin/master
+        });
+        // donorLayer.eachLayer(function (layer) {
+        //     var radius = calcRadius(Number(layer.feature.properties['D' + currentYear + '_' + currentType]));
+        //     if(Number(radius)){
+        //         layer.setRadius(radius);
+        //     }
+        // });
+
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     }
 
     function sequenceUI() {
@@ -165,7 +199,10 @@
             .on('input change', function () {
                 currentYear = $(this).val();
                 resizeCircles();
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
                 output.html(currentYear);
             });
 
@@ -253,7 +290,11 @@
                     dataValues.push(attribute);
                 }
             }
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> origin/master
         });
 
         var sortedValues = dataValues.sort(function (a, b) {
@@ -264,7 +305,10 @@
 
         var maxValues = Math.round(sortedValues[0] / 1000) * 1000;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         var largeDiameter = calcRadius(maxValues) * 2,
             smallDiameter = largeDiameter / 2;
 
