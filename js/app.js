@@ -7,7 +7,7 @@
         zoomSnap: .1,
         center: [40, -93],
         zoom: 4,
-        minZoom: 2,
+        minZoom: 3,
         maxZoom: 7
     });
 
@@ -89,7 +89,7 @@
 
         //addUidonors();
 
-        retrieveInfo(donorLayer, currentYear);
+        //retrieveInfo();
         
         //updateMap(transplantLayer, donorLayer);
         
@@ -134,7 +134,7 @@
             }
         });
         
-        retrieveInfo(donorLayer, currentYear);
+        retrieveInfo();
     }
 
     
@@ -183,7 +183,7 @@
                 output.html(currentYear);
             });
 
-        retrieveInfo(donorLayer, currentYear);
+        retrieveInfo(transplantLayer, donorLayer, currentYear);
         
     }
 
@@ -330,7 +330,7 @@
 
     }
 
-    function retrieveInfo(donorLayer, currentYear) {
+    function retrieveInfo() {
 
         var info = $('#info');
 
@@ -343,8 +343,8 @@
             $('#info span').html(props.State);
             $(".transplants span:first-child").html('(' + currentYear + ')');
             $(".donors span:first-child").html('(' + currentYear + ')');
-            $(".transplants span:last-child").html(props['T1991_ALL']);
-            $(".donors span:last-child").html(props['D1991_ALL']);
+            $(".transplants span:last-child").html(props['T' + currentYear + '_' + currentTransplantType]);
+            $(".donors span:last-child").html(props['D' + currentYear + '_' + currentDonorType]);
 
             e.layer.setStyle({
                 fillOpacity: .6
@@ -379,24 +379,11 @@
 
             var transplantValues = [],
                 donorValues = [];
-
-//            var props = e.layer.feature.properties;
-//            
-//            for (var year in props) {
-//
-//                var attribute = props['T1991_ALL'];
-//
-//                if (Number(attribute)) {
-//
-//                    transplantValues.push(attribute);
-//                    donorValues.push(attribute);
-//                }
-//            }
-
             
             for (var i = 1991; i <= 2016; i++) {
-                transplantValues.push(props['T' + i]);
-                donorValues.push(props['D' + i]);
+                transplantValues.push(props['T' + i + '_' + currentTransplantType]);
+                donorValues.push(props['D' + i + '_' + currentDonorType]);
+                //console.log(i, props['T' + i + '_' + currentTransplantType]);
             }
 
             $('.transplantspark').sparkline(transplantValues, {
