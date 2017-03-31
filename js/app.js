@@ -3,9 +3,9 @@
     L.mapbox.accessToken = 'pk.eyJ1IjoianduZGF2aXMiLCJhIjoiY2l6NzRsN2huMDAzNDJxbzFiOXl6d3BjbCJ9.LTLHf072E8bo_vHCfHOggA';
 
 
-    var map = L.mapbox.map('map', 'mapbox.light', {
+    var map = L.mapbox.map('map', 'mapbox.outdoors', {
         zoomSnap: .1,
-        center: [40, -93],
+        center: [40, -92],
         zoom: 4,
         minZoom: 3,
         maxZoom: 7
@@ -24,7 +24,7 @@
         pointToLayer: function (feature, ll) {
             return L.circleMarker(ll, {
                 opacity: 1,
-                weight: 2.5,
+                weight: 1.7,
                 fillOpacity: 0
             });
         }
@@ -42,10 +42,6 @@
         "INTESTINE": "Intestine"
     }
 
-
-//    var attributeValue = "ALL_ORG",
-//        normValue = "ALL_DON";
-
     var currentYear = "1991",
         currentTransplantType = "ALL",
         currentDonorType = "ALL"
@@ -53,17 +49,6 @@
     
     var transplantLayer,
         donorLayer;
-    
-    
-//
-//    var currentYear = "1991",
-//        currentTransplantType = "ALL",
-//        currentDonorType = "ALL"
-//
-//    let's make our Leaflet layers global for ease of access for now
-//    var transplantLayer,
-//        donorLayer;
-
 
     function drawMap(data) {
 
@@ -87,31 +72,8 @@
 
         addUitransplants();
 
-        //addUidonors();
-
-        //retrieveInfo();
-        
-        //updateMap(transplantLayer, donorLayer);
-        
-
-        // donorLayer.setStyle({
-        //     color: 'blue',
-        // });
-
-//        resizeCircles();
-//
-//        sequenceUI();
-//
-//        addUitransplants();
-//
-//        addUidonors();
-//
-//        retrieveInfo();
-
-
     }
 
-    
     function calcRadius(val) {
         var radius = Math.sqrt(val / Math.PI);
         return radius * 1.5;
@@ -134,10 +96,8 @@
             }
         });
         
-        retrieveInfo();
     }
 
-    
     function sequenceUI() {
 
         var sliderControl = L.control({
@@ -208,36 +168,18 @@
 
             currentTransplantType = $(this).val();
 
-            resizeCircles();
+            resizeCircles(currentTransplantType);
+            
+        $('select[id="ALL_DON"]').change(function () {  
+
+            currentDonorType = $(this).val();
+            
+            resizeCircles(currentDonorType);
         });
 
+        });
+        
     }
-
-//    function addUidonors(donorLayer) {
-//
-//        var donorMenu = L.control({
-//            position: 'topright'
-//        });
-//
-//        donorMenu.onAdd = function (map) {
-//
-//            var div = L.DomUtil.get("ui-donors");
-//
-//            L.DomEvent.disableScrollPropagation(div);
-//            L.DomEvent.disableClickPropagation(div);
-//
-//            return div;
-//        }
-//        donorMenu.addTo(map);
-//
-//        $('select[id="ALL_DON"]').change(function () {  
-//
-//            currentType = $(this).val();
-//
-//            resizeCircles();
-//        });
-//
-//    }
 
     function drawLegend(data) {
 
@@ -341,8 +283,8 @@
             var props = e.layer.feature.properties;
 
             $('#info span').html(props.State);
-            $(".transplants span:first-child").html('(' + currentYear + ')');
-            $(".donors span:first-child").html('(' + currentYear + ')');
+            $(".transplants span:first-child").html('(' + currentTransplantType + ' ' + currentYear + ')');
+            $(".donors span:first-child").html('(' + currentDonorType + ' ' + currentYear + ')');
             $(".transplants span:last-child").html(props['T' + currentYear + '_' + currentTransplantType]);
             $(".donors span:last-child").html(props['D' + currentYear + '_' + currentDonorType]);
 
@@ -384,10 +326,11 @@
                 transplantValues.push(props['T' + i + '_' + currentTransplantType]);
                 donorValues.push(props['D' + i + '_' + currentDonorType]);
                 //console.log(i, props['T' + i + '_' + currentTransplantType]);
+                //console.log(i, props['D' + i + '_' + currentDonorType]);
             }
 
             $('.transplantspark').sparkline(transplantValues, {
-                width: '200px',
+                width: '225px',
                 height: '30px',
                 lineColor: '#035a03',
                 fillColor: '#57c957',
@@ -396,7 +339,7 @@
             });
 
             $('.donorspark').sparkline(donorValues, {
-                width: '200px',
+                width: '225px',
                 height: '30px',
                 lineColor: 'blue',
                 fillColor: 'cornflowerblue',

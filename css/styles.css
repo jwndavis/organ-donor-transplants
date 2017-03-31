@@ -6,7 +6,7 @@ body {
 .legend-xsmall {
     border-radius: 50%;
 }
-h1 {
+h1, h2, h3 {
     color: navy;
     font-size: 30px;
 }
@@ -15,9 +15,6 @@ h2 {
 }
 p {
     color: #5d5b5b;
-}
-background {
-    color: orange;
 }
 hr.xsmall,
 hr.small,
@@ -33,11 +30,15 @@ hr.large {
 }
 label {
     font-size: 1.5em;
-    color: blue;
+    color: white;
+    background-color: blue;
 }
 .donors {
     color: blue;
 }
 .transplants {
     color: green;
+}
+img {
+    vertical-align: middle;
 }

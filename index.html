@@ -16,7 +16,7 @@
     <div class='grid'>
         <div class='col col--12 col--9-ml h180 h-full-ml'>
             <div id="map" class='viewport-third viewport-full-ml'></div>
-
+                
             <!-- ui slider -->
             <div id='slider' class='range w240 bg-white round-ml p12'>
                 <input type='range' min="1991" , max="2016" , value="1" , step="1" class="slider" />
@@ -31,9 +31,9 @@
 
             <!--ui organ type-->
             <div id='ui-organs'>
-                <label>Choose an Organ Type:</label>
-                <div class= 'select' id= "ALL_ORG">
-                    <select class= 'select' id= "ALL_ORG">
+                
+                <div class='select-container' id="ALL_ORG">
+                    <select class='select select--green' id="ALL_ORG">
                         <option value="ALL" selected>All Organs</option>
                         <option value="KID">Kidney</option>
                         <option value="LIV">Liver</option>
@@ -46,14 +46,8 @@
                     </select>
                     <div class='select-arrow'></div>
                 </div>
-            </div>
-
-            <!--ui donor type-->
-<!--
-            <div id='ui-donors'>
-                <label>Choose a Donor Type:</label>
-                <div class= 'select' id= "ALL_DON">
-                    <select class= 'select' id="ALL_DON">
+                <div class= 'select-container mt6' id= "ALL_DON">
+                    <select class='select select--blue' id="ALL_DON">
                         <option value="ALL" selected>All Donors</option>
                         <option value="DES">Deceased Donors</option>
                         <option value="LIG">Living Donors</option>
@@ -61,8 +55,7 @@
                     <div class='select-arrow'></div>
                 </div>
             </div>
--->
-
+            
             <!--legend -->
             <div id='legend' class='bg-white round-ml p18'>
                 <h3 class='txt-bold mb12 w-full mx-auto'>Symbol Size</h3>
@@ -79,33 +72,34 @@
 
         <div class='col col--12 col--3-ml p12 pb6 viewport-twothirds viewport-full-ml'>
             <div class='h-full scroll-auto'>
-                <h1 class='txt-headline mb6'>Increased Success of Organ Transplants</h1><p>For the last 25 years, organ transplants have been growing in the United States due to medical advances and the growing number of willing organ donors. Many people with severe conditions wait years to receive a healthy organ. This map shows the number of transplants performed in each state over the last 25 years as well as how many organs have been donated for those in need. The number of transplanted organs continues to surpass the number of donors across the nation. This indicates that while the number of donors has risen, so have the number of people requiring healthy organs.</p>
-                <h2 class='txt-xl mt18 mb12'>Organ Donors</h2>
-                <p>The slide bar at the lower left of the screen allows you to scroll through the last 25 years of organ donation and transplantation. When you move the mouse over each proportional symbol, an information window appears showing how many transplants were received by patients and how many organs were donated for each year for that state. A dropdown menu in the upper right will allow you to filter transplanted organs by type to compare with the total number of donors. The trends for each state are represented by all organs and donors.</p>
-                <img src= "images/life.jpg">
+                <h1 class='txt-xl mb6'>Increased Success of Organ Transplants</h1>
+                <p>For the last 25 years, organ transplants have been growing in the United States due to medical advances and the growing number of willing organ donors. Many people with severe conditions wait years to receive a healthy organ. This map shows the number of transplants performed in each state over the last 25 years as well as how many organs have been donated for those in need. The number of transplanted organs continues to surpass the number of donors across the nation. This indicates that while the number of donors has risen, so have the number of people requiring healthy organs.</p>
+                <h2 class='txt-xl mt18 mb12'>Map Interaction</h2>
+                <p>The slide bar at the lower left of the screen allows you to scroll through the last 25 years of organ donation and transplantation. When you move the mouse over each proportional symbol, an information window appears showing how many transplants were received by patients and how many organs were donated for each year for that state. Dropdown menus in the upper right will allow you to filter either the transplanted organs by type or select the donor type to compare the data for each state. The trends for each state are represented by green for the organs and blue for the donors.</p>
+                <h2 class='txt-xl mt18 mb12'>Organ Donors and Organ-izations</h2>
+                <p>For patients waiting for a life-saving transplant, organ donors are their heroes. Communities of donors are growing every day. There are many organizations to help transplant patients and donors alike around the country. The United Network for Organ Sharing (UNOS) manages the nation's organ transplant system to help save lives every day. My data was collected from the Organ Procurement and Transplantation Network (OPTN), the website managed by the Health Resources and Services Administration working with UNOS to provide data, research, and eductaion about organ donoation and transplantation. Eventhough there has been an increase of transplants, donors are always needed. We can't thank them enough!</p>
+                    <a class='link' target="_blank" href="https://www.donatelife.net/"><img src="images/life.jpg" style="vertical-align:middle"></a>
                 <footer class='mt12 bg-gray-faint txt-s'>
                     <ul>
-                        <li>Explore <a class='link' href='http://unos.org'>UNOS.</a></li>
-                        <li>Explore <a class='link' href='https://optn.transplant.hrsa.gov/'>OPTN.</a></li>
+                        <li>See what The United Network for Organ Sharing is working on now! <a class='link' target="_blank" href='http://unos.org'>UNOS</a></li>
+                        <li>Explore The Organ Procurement and Transplantation Network's data. <a class='link' target="_blank" href='https://optn.transplant.hrsa.gov/'>OPTN.</a></li>
+                        <li>For fun, meet the gang over at <a class='link' target="_blank" href="https://iheartguts.com/">I Heart Guts!</a></li>
                         <li>Map authored by <a class='link' href='https://jwndavis.github.io/'>John Davis</a></li>
-                        </ul>
+                    </ul>
                 </footer>
             </div>
         </div>
     </div>
 
     <div id='info' class='py6 px12 bg-white border border--gray-light round absolute wmax200 none'>
-    <p>State: <span class='txt-1 txt-bold'></span></p>
-    <p class='transplants'>Transplants <span></span>: <span class='txt-1 txt-bold'></span></p>
-    <p class='donors'>Donors <span></span>: <span class='txt-1 txt-bold'></span></p>
-    <hr class='txt-hr'>
-    <p class='my6'>Trend for All Transplanted<br>Organs and Donors:<br>1991 &ndash; 2016</p>
-    <p class='mb6'><span class='transplantspark'></span></p>
-    <p><span class='donorspark'></span></p>
+        <p>State: <span class='txt-1 txt-bold'></span></p>
+        <p class='transplants'>Transplants <span></span>: <span class='txt-1 txt-bold'></span></p>
+        <p class='donors'>Donors <span></span>: <span class='txt-1 txt-bold'></span></p>
+        <hr class='txt-hr'>
+        <p class='txt-1 txt-bold my6'>25 Year Trend 1991 &ndash; 2016</p>
+        <p class='mb6'><span class='transplantspark'></span></p>
+        <p><span class='donorspark'></span></p>
     </div>
-
-
-
 
     <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
