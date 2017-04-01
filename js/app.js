@@ -15,6 +15,7 @@
         .on('ready', function (e) {
             drawMap(e.target.toGeoJSON());
             drawLegend(e.target.toGeoJSON());
+            retrieveInfo(e.target.toGeoJSON());
         })
         .on('error', function (e) {
             console.log(e.error[0].message);
@@ -45,14 +46,12 @@
     var currentYear = "1991",
         currentTransplantType = "ALL",
         currentDonorType = "ALL"
-    
-    
+
+
     var transplantLayer,
         donorLayer;
 
     function drawMap(data) {
-
-        //console.log(data);
 
         transplantLayer = L.geoJson(data, options).addTo(map);
 
@@ -71,6 +70,8 @@
         sequenceUI();
 
         addUitransplants();
+        
+        retrieveInfo();
 
     }
 
@@ -79,23 +80,22 @@
         return radius * 1.5;
     }
 
-    
+
     function resizeCircles() {
 
         transplantLayer.eachLayer(function (layer) {
-
             var radius = calcRadius(Number(layer.feature.properties['T' + currentYear + '_' + currentTransplantType]));
-            if(Number(radius)) {
-            layer.setRadius(radius);
+            if (Number(radius)) {
+                layer.setRadius(radius);
             }
         });
         donorLayer.eachLayer(function (layer) {
             var radius = calcRadius(Number(layer.feature.properties['D' + currentYear + '_' + currentDonorType]));
-            if(Number(radius)) {
-            layer.setRadius(radius);
+            if (Number(radius)) {
+                layer.setRadius(radius);
             }
         });
-        
+
     }
 
     function sequenceUI() {
@@ -143,8 +143,6 @@
                 output.html(currentYear);
             });
 
-        retrieveInfo(transplantLayer, donorLayer, currentYear);
-        
     }
 
     function addUitransplants() {
@@ -164,21 +162,26 @@
         }
         transplantMenu.addTo(map);
 
-        $('select[id="ALL_ORG"]').change(function () {
+        if ($('select[id="ALL_ORG"]')) {
 
-            currentTransplantType = $(this).val();
+            $('select[id="ALL_ORG"]').change(function () {
 
-            resizeCircles(currentTransplantType);
-            
-        $('select[id="ALL_DON"]').change(function () {  
+                currentTransplantType = $(this).val();
 
-            currentDonorType = $(this).val();
-            
-            resizeCircles(currentDonorType);
-        });
+                resizeCircles(currentTransplantType);
+            });
+        }
+        if ($('select[id="ALL_DON"]')) {
 
-        });
-        
+            $('select[id="ALL_DON"]').change(function () {
+
+                currentDonorType = $(this).val();
+
+                resizeCircles(currentDonorType);
+            });
+
+        }
+
     }
 
     function drawLegend(data) {
@@ -246,7 +249,7 @@
             'top': largeDiameter - xsmallDiameter,
             'left': xsmallDiameter * 1.5
         });
-        
+
         $(".legend-large-label").html(maxValues);
         $(".legend-small-label").html((maxValues / 2));
         $(".legend-xsmall-label").html((maxValues / 4));
@@ -260,7 +263,7 @@
             'top': smallDiameter - 11,
             'left': largeDiameter + 30
         });
-        
+
         $(".legend-xsmall-label").css({
             'top': largeDiameter - xsmallDiameter - 11,
             'left': largeDiameter + 30
@@ -321,7 +324,7 @@
 
             var transplantValues = [],
                 donorValues = [];
-            
+
             for (var i = 1991; i <= 2016; i++) {
                 transplantValues.push(props['T' + i + '_' + currentTransplantType]);
                 donorValues.push(props['D' + i + '_' + currentDonorType]);

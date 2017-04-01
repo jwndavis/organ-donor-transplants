@@ -23,7 +23,7 @@ hr.large {
     position: absolute;
     top: -8px;
     left: 50px;
-    border: 1px solid #ccc;
+    border: 1px solid blue;
     /* overwrite assembly.css rule */
     margin-top: 8px;
     /* overwrite assembly.css rule */
@@ -38,7 +38,4 @@ label {
 }
 .transplants {
     color: green;
-}
-img {
-    vertical-align: middle;
 }

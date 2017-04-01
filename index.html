@@ -18,13 +18,13 @@
             <div id="map" class='viewport-third viewport-full-ml'></div>
                 
             <!-- ui slider -->
-            <div id='slider' class='range w240 bg-white round-ml p12'>
+            <div id='slider' class='range w240 bg-gray-light border border-green round-ml p12'>
                 <input type='range' min="1991" , max="2016" , value="1" , step="1" class="slider" />
             </div>
 
             <!-- ui year -->
-            <div id='current-year' class='pt6 px12 bg-white border border--gray-light round'>
-                <p class='txt-bold txt-headline'>Year:
+            <div id='current-year' class='pt6 px12 bg-gray-light border border-green round-ml'>
+                <p class='txt-bold txt-headline color-green-dark'>Year:
                     <span>1991</span>
                 </p>
             </div>
@@ -57,12 +57,12 @@
             </div>
             
             <!--legend -->
-            <div id='legend' class='bg-white round-ml p18'>
-                <h3 class='txt-bold mb12 w-full mx-auto'>Symbol Size</h3>
+            <div id='legend' class='bg-gray-light border border-green round-ml p18'>
+                <h3 class='txt-bold mb12 w-full mx-auto'>Total Number of Transplants <br>and Organ Donors per State</h3><br>
                 <div class='legend-circles relative w180 wmax180'>
-                    <div class="legend-large border border--gray-light absolute"></div>
-                    <div class="legend-small border border--gray-light absolute"></div>
-                    <div class="legend-xsmall border border--gray-light absolute"></div>
+                    <div class="legend-large border border--blue absolute"></div>
+                    <div class="legend-small border border--blue absolute"></div>
+                    <div class="legend-xsmall border border--blue absolute"></div>
                     <div class="legend-large-label txt-m absolute"></div>
                     <div class="legend-small-label txt-m absolute"></div>
                     <div class="legend-xsmall-label txt-m absolute"></div>
@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <div class='col col--12 col--3-ml p12 pb6 viewport-twothirds viewport-full-ml'>
+        <div class='col col--12 col--3-ml p12 bg-gray-light pb6 viewport-twothirds viewport-full-ml'>
             <div class='h-full scroll-auto'>
                 <h1 class='txt-xl mb6'>Increased Success of Organ Transplants</h1>
                 <p>For the last 25 years, organ transplants have been growing in the United States due to medical advances and the growing number of willing organ donors. Many people with severe conditions wait years to receive a healthy organ. This map shows the number of transplants performed in each state over the last 25 years as well as how many organs have been donated for those in need. The number of transplanted organs continues to surpass the number of donors across the nation. This indicates that while the number of donors has risen, so have the number of people requiring healthy organs.</p>
@@ -79,7 +79,7 @@
                 <h2 class='txt-xl mt18 mb12'>Organ Donors and Organ-izations</h2>
                 <p>For patients waiting for a life-saving transplant, organ donors are their heroes. Communities of donors are growing every day. There are many organizations to help transplant patients and donors alike around the country. The United Network for Organ Sharing (UNOS) manages the nation's organ transplant system to help save lives every day. My data was collected from the Organ Procurement and Transplantation Network (OPTN), the website managed by the Health Resources and Services Administration working with UNOS to provide data, research, and eductaion about organ donoation and transplantation. Eventhough there has been an increase of transplants, donors are always needed. We can't thank them enough!</p>
                     <a class='link' target="_blank" href="https://www.donatelife.net/"><img src="images/life.jpg" style="vertical-align:middle"></a>
-                <footer class='mt12 bg-gray-faint txt-s'>
+                <footer class='mt12 bg-gray-dark txt-s color-gray-light'>
                     <ul>
                         <li>See what The United Network for Organ Sharing is working on now! <a class='link' target="_blank" href='http://unos.org'>UNOS</a></li>
                         <li>Explore The Organ Procurement and Transplantation Network's data. <a class='link' target="_blank" href='https://optn.transplant.hrsa.gov/'>OPTN.</a></li>
@@ -91,14 +91,14 @@
         </div>
     </div>
 
-    <div id='info' class='py6 px12 bg-white border border--gray-light round absolute wmax200 none'>
+    <div id='info' class='py6 px12 bg-gray-light border border--navy round absolute wmax200 none'>
         <p>State: <span class='txt-1 txt-bold'></span></p>
         <p class='transplants'>Transplants <span></span>: <span class='txt-1 txt-bold'></span></p>
         <p class='donors'>Donors <span></span>: <span class='txt-1 txt-bold'></span></p>
         <hr class='txt-hr'>
         <p class='txt-1 txt-bold my6'>25 Year Trend 1991 &ndash; 2016</p>
-        <p class='mb6'><span class='transplantspark'></span></p>
-        <p><span class='donorspark'></span></p>
+        <p class='mb6'>Transplants</p><span class='transplantspark'></span>
+        <p>Donors</p><span class='donorspark'></span>
     </div>
 
     <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
