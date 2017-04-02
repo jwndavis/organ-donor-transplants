@@ -1,2 +1,2 @@
 # organ-donor-transplants
-Map about organ donation and transplantation across the U.S.
+This web map is about organ donation and transplantation across the U.S. from 1991 through 2016. Proportional symbols for the number of transplants and donors for each state are shown with additional interactive elements and information in order to learn more about each state's growing awareness of the help organ donors are for patients requiring life saving organ transplants.

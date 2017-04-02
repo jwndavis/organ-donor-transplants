@@ -31,22 +31,9 @@
         }
     }
 
-    var labels = {
-        "ALL_ORG": "All Organs",
-        "KIDNEY": "Kidneys",
-        "LIVER": "Livers",
-        "PANCREAS": "Pancreas",
-        "KID_PAN": "Kidney/Pancreas",
-        "HEART": "Hearts",
-        "LUNG": "Lungs",
-        "HRT_LUN": "Heart/Lung",
-        "INTESTINE": "Intestine"
-    }
-
     var currentYear = "1991",
         currentTransplantType = "ALL",
         currentDonorType = "ALL"
-
 
     var transplantLayer,
         donorLayer;
@@ -70,14 +57,12 @@
         sequenceUI();
 
         addUitransplants();
-        
-        retrieveInfo();
 
     }
 
     function calcRadius(val) {
         var radius = Math.sqrt(val / Math.PI);
-        return radius * 1.5;
+        return radius * 1.7;
     }
 
 
@@ -162,18 +147,18 @@
         }
         transplantMenu.addTo(map);
 
-        if ($('select[id="ALL_ORG"]')) {
+        if ($('select[id="SEL_ORG"]')) {
 
-            $('select[id="ALL_ORG"]').change(function () {
+            $('select[id="SEL_ORG"]').change(function () {
 
                 currentTransplantType = $(this).val();
 
                 resizeCircles(currentTransplantType);
             });
         }
-        if ($('select[id="ALL_DON"]')) {
+        if ($('select[id="SEL_DON"]')) {
 
-            $('select[id="ALL_DON"]').change(function () {
+            $('select[id="SEL_DON"]').change(function () {
 
                 currentDonorType = $(this).val();
 
@@ -199,6 +184,7 @@
             return div;
 
         }
+        
         legend.addTo(map);
 
         var dataValues = [];
@@ -328,8 +314,6 @@
             for (var i = 1991; i <= 2016; i++) {
                 transplantValues.push(props['T' + i + '_' + currentTransplantType]);
                 donorValues.push(props['D' + i + '_' + currentDonorType]);
-                //console.log(i, props['T' + i + '_' + currentTransplantType]);
-                //console.log(i, props['D' + i + '_' + currentDonorType]);
             }
 
             $('.transplantspark').sparkline(transplantValues, {
