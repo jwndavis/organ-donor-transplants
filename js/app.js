@@ -184,7 +184,7 @@
             return div;
 
         }
-        
+
         legend.addTo(map);
 
         var dataValues = [];

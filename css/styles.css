@@ -1,22 +1,29 @@
 body {
     font-family: "Work Sans", sans-serif;
 }
+
 .legend-large,
 .legend-small,
 .legend-xsmall {
     border-radius: 50%;
     border: 1px solid blue;
 }
-h1, h2, h3 {
+
+h1,
+h2,
+h3 {
     color: navy;
     font-size: 30px;
 }
+
 h2 {
     color: cornflowerblue;
 }
+
 p {
     color: #393939;
 }
+
 hr.xsmall,
 hr.small,
 hr.large {
@@ -29,14 +36,17 @@ hr.large {
     margin-top: 8px;
     /* overwrite assembly.css rule */
 }
+
 label {
     font-size: 1.5em;
     color: white;
     background-color: blue;
 }
+
 .donors {
     color: blue;
 }
+
 .transplants {
     color: green;
 }
