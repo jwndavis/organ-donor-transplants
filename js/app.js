@@ -1,15 +1,18 @@
 (function () {
-
+    
     L.mapbox.accessToken = 'pk.eyJ1IjoianduZGF2aXMiLCJhIjoiY2l6NzRsN2huMDAzNDJxbzFiOXl6d3BjbCJ9.LTLHf072E8bo_vHCfHOggA';
 
-
-    var map = L.mapbox.map('map', 'mapbox.outdoors', {
-        zoomSnap: .1,
-        center: [40, -92],
-        zoom: 4,
-        minZoom: 3,
-        maxZoom: 7
-    });
+    var map = L.mapbox.map('map')
+        .setView([40, -92], 4)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v9'));
+    
+   // var map = L.mapbox.map('map', 'mapbox.outdoors', {
+    //    zoomSnap: .1,
+    //    center: [40, -92],
+    //    zoom: 4,
+    //    minZoom: 3,
+    //    maxZoom: 7
+   // });
 
     omnivore.csv('data/transplant_donor_data2.csv')
         .on('ready', function (e) {
